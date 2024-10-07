@@ -58,6 +58,7 @@ namespace Zork
 							   where command.Verbs.Contains(commandString, StringComparer.OrdinalIgnoreCase)
 							   select new CommandContext(commandString, command);
 			var result = commandQuery.FirstOrDefault();
+			//FirstOrDefault returns, when provided with an invalid command, an empty CommandContext with a broken command, causing the provided version of line 68 to crash the program.
 			return (result != null && result.Command != null) ? result : null;
 		}
 		public bool PerformCommand(Game game, string commandString)
